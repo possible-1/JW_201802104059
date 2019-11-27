@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>title</title>
+    <script src="../../js/jquery.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+                $.ajax({
+                    url : "/degree/list.ctl", //请求服务器资源
+                    type : "get",
+                    //dataTpye : "json",
+                    success : function(msg) {
+                        var obj= eval("(" + msg + ")");//json字串->json对象,方便遍历
+                        var s = "<tr><td>ID</td><td>编号</td><td>学位</td><td>备注</td></tr>";
+                        for (var i in obj.degrees){
+                            s += "<tr><td>" + obj.degrees[i].id + "</td><td>" + obj.degrees[i].no + "</td><td>" + obj.degrees[i].description + "</td><td>" + obj.degrees[i].remarks+ "</td></tr>";
+                        }
+                        $("#table").html(s);
+                    },
+                    error:function(){  //请求失败的回调方法
+                        alert("请求失败，请重试!");
+                    }
+                });
+        });
+    </script>
+
+</head>
+<body>
+<table border = "1px" bgcolor="#5f9ea0" id = "table"></table>
+
+</body>
+</html>

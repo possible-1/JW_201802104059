@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "f28f5889-1137-4709-86ca-fe1be48f9dc3",
+		"name": "ProfTitleTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/profTitle.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af8a6d76-8a86-46f8-bc94-a860499a0600",
+						"exec": [
+							"tests[\"Body matches String 教授\"]= responseBody.has(\"教授\");",
+							"tests[\"Body matches String 副教授\"]= responseBody.has(\"副教授\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/profTitle.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profTitle.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/profTitle.ctl?id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dd3a3978-bdd9-40da-8458-002bf20f497f",
+						"exec": [
+							"tests[\"id=1的头衔有字串'教授'\"]= responseBody.has(\"教授\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/profTitle.ctl?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profTitle.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add localhost:8080/profTitle.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d258a6ec-70ff-4686-99ff-20cc0486ce21",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"增加成功？\"] =jsonData.message ===\"增加成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"讲师\",\"no\":\"03\",\"remarks\":\"\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/profTitle.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profTitle.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update localhost:8080/profTitle.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f3d8516f-890f-4299-a3d6-79204f973f7c",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"修改成功？\"] =jsonData.message ===\"修改成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"助理\",\"id\":4,\"no\":\"04\",\"remarks\":\"\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/profTitle.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profTitle.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete localhost:8080/profTitle.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e63a44b5-9fae-46ff-a4d5-3214c0df8e10",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"删除成功？\"] =jsonData.message ===\"删除成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/profTitle.ctl?id=4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"profTitle.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

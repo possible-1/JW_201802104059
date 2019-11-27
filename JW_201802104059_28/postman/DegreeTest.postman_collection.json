@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "e7d4a51f-9cbc-4f5e-8707-59cc282fa249",
+		"name": "DegreeTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/degree.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e2fd42d9-420f-4daf-bc28-82fbc743a2fe",
+						"exec": [
+							"tests[\"Body matches String 硕士\"]= responseBody.has(\"硕士\");",
+							"tests[\"Body matches String 博士\"]= responseBody.has(\"博士\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/degree.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"degree.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/degree.ctl?id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef8aea9f-0fd7-4dda-b36e-c6dd121d5f61",
+						"exec": [
+							"tests[\"id=1的学位有字串'硕士'\"]= responseBody.has(\"硕士\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/degree.ctl?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"degree.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add localhost:8080/degree.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d21f4a31-7e64-4ff8-a08e-ed3d18fe9abc",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"增加成功？\"] =jsonData.message ===\"增加成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"专科\",\"no\":\"03\",\"remarks\":\"\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/degree.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"degree.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update localhost:8080/degree.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb1b8a83-4f21-4e2b-adc9-cf7de6025eb0",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"修改成功？\"] =jsonData.message ===\"修改成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"高中\",\"id\":4,\"no\":\"05\",\"remarks\":\"\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/degree.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"degree.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete localhost:8080/degree.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "008dc239-f9c1-4ac6-a1be-9ba87bb5fe2c",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"删除成功？\"] =jsonData.message ===\"删除成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/degree.ctl?id=5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"degree.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

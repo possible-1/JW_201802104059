@@ -1,0 +1,19 @@
+import java.io.*;
+
+public class Browser implements Servlet {
+    @Override
+    public void service(DataInputStream request, DataOutputStream response) throws IOException {
+        //创建输入流对象
+        BufferedReader br=new BufferedReader(new FileReader(request.readUTF()));
+        String content=br.readLine();
+        String result="";
+        //将整个文本文档的内容打包成一个字符串
+        while (content!=null){
+            result += content+"\n";
+            content =br.readLine();
+        }
+        //将最终得到的代表整个文档的字符串写入输出流中
+        response.writeUTF(result);
+        response.flush();
+    }
+}

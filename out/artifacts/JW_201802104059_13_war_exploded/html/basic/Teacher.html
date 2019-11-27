@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>title</title>
+    <script src="../../js/jquery.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $.ajax({
+                url : "/teacher/lists.ctl", //请求服务器资源
+                type : "get",
+                //dataTpye : "json",
+                success : function(msg) {
+                    var obj= eval("(" + msg + ")");//json字串->json对象,方便遍历
+                    var s = "<tr><td>ID</td><td>姓名</td><td>operation</td></tr>";
+                    for (var i in obj.teachers){
+                            s += "<tr><td>" + obj.teachers[i].id + "</td><td>" + obj.teachers[i].name + "</td>"
+                                + "<td>" + "<a href='' onclick=deleteTeacher(" + obj.teachers[i].id + ")>delete</a>" +"</td></tr>";
+                    }
+                    $("#table").html(s);
+                },
+                error:function(){  //请求失败的回调方法
+                    alert("请求失败，请重试!");
+                }
+            });
+        });
+
+        function deleteTeacher(id) {
+            confirm_ = confirm('确认删除?');
+            // alert(id);
+            if(confirm_){
+                $.ajax({
+                    type:"get",
+                    url:"/teacher/delete.ctl",
+                    //请求后台时所传递的参数
+                    data:{
+                        "id":id
+                    },
+                    //参数类型为json
+                    contentType: "application/json,charset = utf-8",
+                    //返回值格式为json
+                    //dataType:"json",
+
+                    success:function(){
+                        alert("删除成功")
+                        // 因为本次请求的url会被重定向到Teacher.html，所以正常情况下，这里不会返回信息
+                    },
+                    error:function () {
+                        alert("error");
+                    }
+                });
+            }
+        }
+    </script>
+
+</head>
+<body>
+<table border = "1px" bgcolor="#5f9ea0" id = "table"></table>
+
+</body>
+</html>

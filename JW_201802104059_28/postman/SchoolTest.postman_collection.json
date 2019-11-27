@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "d27bae7a-960c-481c-b048-f61f20da8547",
+		"name": "SchoolTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/school.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "46335f06-4f3b-4c5d-82d4-317f8eea54b6",
+						"exec": [
+							"tests[\"Body matches String 管理工程学院\"]= responseBody.has(\"管理工程学院\");",
+							"tests[\"Body matches String 理学院\"]= responseBody.has(\"理学院\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/school.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"school.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/school.ctl?id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ad67981-72cf-414c-ba26-8118d9363aaf",
+						"exec": [
+							"tests[\"id=1的学院有字串'管理工程学院'\"]= responseBody.has(\"管理工程学院\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/school.ctl?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"school.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add localhost:8080/school.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "04ce5f3d-65a7-400b-9be0-ec85d9121680",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"增加成功？\"] =jsonData.message ===\"增加成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"艺术学院\",\"no\":\"04\",\"remarks\":\"\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/school.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"school.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update localhost:8080/school.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb4d26b9-e035-4201-b174-d7705e6325e7",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"修改成功？\"] =jsonData.message ===\"修改成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"土木学院\",\"id\":4,\"no\":\"04\",\"remarks\":\"\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/school.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"school.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete localhost:8080/school.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7003266-c6ad-4f0e-95b3-39ace7a378cc",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"删除成功？\"] =jsonData.message ===\"删除成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/school.ctl?id=4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"school.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

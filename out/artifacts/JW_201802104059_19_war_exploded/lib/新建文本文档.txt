@@ -1,0 +1,14 @@
+DELIMITER//
+DROP PROCEDURE IF EXISTS sp_addSchool//
+CREATE PRODEDURE sp_addSchool(
+         IN description VARCHAR(255),
+         no VARCHAR(255),
+         remarks VARCHAR(255),
+         OUT id INT
+)
+BEGIN
+INSERT INTO School(no,description,remarks)
+VALUES(no,description,remarks);
+SELECT LAST_INSERT_ID() INTO id;
+END//
+DELIMITER ;

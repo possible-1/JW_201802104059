@@ -1,0 +1,78 @@
+create database bysj default character set utf8 collate utf8_general_ci;
+use bysj;
+create table Degree(
+id bigint not null auto_increment,
+no varchar(255) not null,
+description varchar(255) not null,
+remarks varchar(255),
+primary key(id)
+);
+create table School(
+id bigint not null auto_increment,
+description varchar(255) not null,
+no varchar(255) not null,
+remarks varchar(255),
+primary key (id)
+);
+create table Department(
+id bigint not null auto_increment,
+description varchar(255) not null,
+no varchar(255) not null,
+remarks varchar(255),
+school_id bigint not null,
+FOREIGN KEY(school_id) REFERENCES School(id),
+primary key (id)
+);
+
+create table ProfTitle(
+id bigint not null auto_increment,
+no varchar(255) not null,
+description varchar(255) not null,
+remarks varchar(255),
+primary key(id)
+);
+create table Teacher(
+id  bigint not null auto_increment,
+name varchar(255) not null,
+profTitle_id bigint not null,
+degree_id bigint not null,
+department_id bigint not null,
+foreign key(profTitle_id) references ProfTitle(id),
+foreign key(degree_id) references Degree(id),
+foreign key(department_id) references Department(id),
+primary key(id)
+);
+
+DELIMITER //
+create procedure sp_addSchool(
+	in description varchar(255),
+	no varchar(255),
+	remarks varchar(255),
+	out id int
+)
+BEGIN
+	insert into school (description,no,remarks)
+	values(description,no,remarks);
+	select LAST_INSERT_ID() INTO id;	
+END
+//
+
+DELIMITER ;
+
+insert into School (id,no,description,remarks) 
+values(1,"01","管理学院"," ");
+insert into Department(id,no,description,remarks,school_id) 
+values(1,"01","信管"," ",1);
+insert into ProfTitle (id,no,description,remarks) 
+values(1,"01","教授"," ");
+insert into Degree(id,no,description,remarks) 
+values(1,"01","博士"," ");
+insert into Teacher(id,name,proTitle_id,degree_id,department_id) 
+values(1,"刘梅",1,1,1);
+drop
+show  procedure status like'sp%' \G;
+{"description":"土管","no":"02","remarks":" ","school_id":1}
+{"description":"副教授","no":"02","remarks":" "}
+{"description":"土木学院","no":"02","remarks":" "}
+{"description":"硕士","no":"02","remarks":" "}
+{"name":"王磊","profTitle_id":1,"degree_id":1,"department_id":1}

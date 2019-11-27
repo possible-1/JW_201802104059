@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "5c8a5567-339f-4bab-a1ed-d806d296f2bf",
+		"name": "DepartmentTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/department.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9618640b-d426-4545-a6b5-fc50c12a2f17",
+						"exec": [
+							"tests[\"Body matches String 最好的专业\"]= responseBody.has(\"最好的专业\");",
+							"tests[\"Body matches String 信息管理\"]= responseBody.has(\"信息管理\");",
+							"tests[\"Body matches String 应用数学\"]= responseBody.has(\"应用数学\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/department.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"department.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/department.ctl?id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b58cac3-391e-4e8f-828c-5e637fd1a0f1",
+						"exec": [
+							"tests[\"id=1的专业有字串'最好的专业'\"]= responseBody.has(\"最好的专业\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/department.ctl?id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"department.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/department.ctl?id=1&paraType=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b58cac3-391e-4e8f-828c-5e637fd1a0f1",
+						"exec": [
+							"tests[\"id=1的学院有专业'最好的专业'\"]= responseBody.has(\"最好的专业\");",
+							"tests[\"id=1的学院有专业'信息管理'\"]= responseBody.has(\"信息管理\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/department.ctl?id=1&paraType=school",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"department.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						},
+						{
+							"key": "paraType",
+							"value": "school"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add localhost:8080/department.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67f2b7c8-7171-4262-97e5-a82e5ace2185",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"增加成功？\"] =jsonData.message ===\"增加成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"造价\",\"no\":\"07\",\"remarks\":\"\",\"school\":{\"id\":1}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/department.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"department.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update localhost:8080/department.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d5c149c-9671-404a-89f2-4943a35c0542",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"修改成功？\"] =jsonData.message ===\"修改成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"应用化学\",\"id\":12,\"no\":\"05\",\"remarks\":\"\",\"school\":{\"id\":2}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/department.ctl",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"department.ctl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete localhost:8080/department.ctl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "780943c5-9e55-48c9-8e5e-34e6ec05d39c",
+						"exec": [
+							"var jsonData= JSON.parse(responseBody);",
+							"tests[\"删除成功？\"] =jsonData.message ===\"删除成功\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/department.ctl?id=12",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"department.ctl"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "12"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
